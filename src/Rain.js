@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import "./Rain.css"; // Import the CSS file
+import "./Rain.css";
 
 function Rain() {
-  const ROWS = 15; // Number of rows
-  const COLS = 20; // Number of columns
-  const COLORS = ["#4287f5", "#42c5f5", "#42f5ef", "#42f5c5"]; // Colors for raindrops
-  const SPEED = 100; // Speed of the animation in milliseconds
+  const ROWS = 15;
+  const COLS = 20;
+  const COLORS = ["red", "green", "blue", "purple", "pink"];
 
-  // Create the initial grid with inactive cells
+  const SPEED = 100;
+
   const createInitialGrid = () => {
     let grid = [];
     for (let i = 0; i < ROWS; i++) {
       let row = [];
       for (let j = 0; j < COLS; j++) {
         row.push({
-          isActive: false, // No raindrop in the cell
-          color: COLORS[Math.floor(Math.random() * COLORS.length)], // Random color
+          isActive: false,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
         });
       }
       grid.push(row);
@@ -30,7 +30,6 @@ function Rain() {
       setGrid((prevGrid) => {
         let newGrid = createInitialGrid();
 
-        // Move drops down by one row
         for (let i = ROWS - 1; i > 0; i--) {
           for (let j = 0; j < COLS; j++) {
             newGrid[i][j].isActive = prevGrid[i - 1][j].isActive;
@@ -38,7 +37,6 @@ function Rain() {
           }
         }
 
-        // Create new drops in the first row
         for (let j = 0; j < COLS; j++) {
           if (Math.random() < 0.3) {
             newGrid[0][j].isActive = true;
